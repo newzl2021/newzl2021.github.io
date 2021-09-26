@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang=zh_cn>
+<meta charset=utf-8>
+<title>XiaoNiu工具</title>
+<meta name=keywords content=程序员工具>
+<meta name=description content=程序员工具>
+<link rel="shortcut icon" href=/favicon.ico>
+<link href=https://cdn.bootcss.com/font-awesome/5.10.0-11/css/all.min.css rel=stylesheet>
+<link href=https://cdn.bootcss.com/jsoneditor/6.1.0/jsoneditor.min.css rel=stylesheet>
+<link href=https://cdn.bootcss.com/highlight.js/9.15.9/styles/idea.min.css rel="stylesheet">
+<link rel=stylesheet href=../static/css/style.css>
+<style>
+    .container {
+        max-width: 100%
+    }
+    pre {
+        overflow: auto
+    }
+    .jsoneditor-poweredBy {
+        display: none
+    }
+    div.jsoneditor-menu,
+    .jsoneditor-modal .pico-modal-header {
+        background-color: #1E90FF
+    }
+    div.jsoneditor,
+    div.jsoneditor-menu {
+        border: 1px solid #1E90FF
+    }
+    .select {
+        flex-shrink: 1;
+        width: 100%
+    }
+    .options {
+        width: 200px;
+        margin: 0 24px;
+    }
+    #input_size {
+        max-width: 111px
+    }
+    .image {
+        width: 280px;
+        height: 280px;
+        background-color: #f3f3f3;
+        clear: both;
+        display: block;
+        margin: auto
+    }
+    #msg_list {
+        padding: 8px 16px;
+        height: 70vh;
+        font-size: 14px;
+        overflow: auto
+    }
+</style>
+<aside>
+    <h1 class=logo><a href="/">XiaoNiu工具</a></h1>
+    <nav class=side-nav>
+        <p>JSON
+        <ul>
+            <li><a href=/zh/json.html>JSON格式化</a>
+            <li><a href=/zh/json2xml.html>JSON/XML转换</a>
+            <li><a href=/zh/json2yaml.html>JSON/YAML转换</a>
+            <li><a href=/zh/json2go.html>JSON转Go Struct</a>
+        </ul>
+        <p>Base64
+        <ul>
+            <li><a href=/zh/base64.html>Base64编码解码</a>
+            <li><a href=/zh/image2base64.html>图片Base64编码</a>
+        </ul>
+        <p>转换
+        <ul>
+            <li><a href=/zh/timestamp.html>Unix时间戳</a>
+            <li><a href=/zh/color.html>颜色值转换</a>
+            <li><a href=/zh/number.html>进制转换</a>
+            <li><a href=/zh/url.html>URL编码解码</a>
+            <li><a href=/zh/unicode.html>Unicode编码转换</a>
+            <li><a href=/zh/pdf2img.html>PDF转图片</a>
+        </ul>
+        <p>Hash
+        <ul>
+            <li><a href=/zh/hash.html>Hash计算</a>
+            <li><a href=/zh/hashfile.html>文件Hash计算</a>
+        </ul>
+        <p>加密
+        <ul>
+            <li><a href=/zh/encrypt_aes.html>AES加密解密</a>
+            <li><a href=/zh/encrypt_des.html>DES加密解密</a>
+            <li><a href=/zh/encrypt_rsa.html>RSA加密解密</a>
+        </ul>
+        <p>其他
+        <ul>
+            <li><a href=/zh/tinyimg.html>图片压缩</a>
+            <li><a href=/zh/qrcode.html>二维码制作</a>
+            <li><a href=/zh/websocket.html>WebSocket测试</a>
+            <li><a href=/zh/regex.html>正则表达式测试</a>
+        </ul>
+    </nav>
+</aside>
+<script>
+var _hmt = _hmt || [];
+let hm = document.createElement("script");
+hm.src = "https://hm.baidu.com/hm.js?e3d5bc397b23c3f6a8036739dae1557b";
+let s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+let tools = document.querySelectorAll('.side-nav li');
+for (let i = 0; i < tools.length; i++) {
+    let node = tools[i];
+    if (node.querySelector('a').getAttribute('href').endsWith(document.location.pathname)) {
+        node.classList.add('active');
+        break
+    }
+}
+</script><main>
+    <div class=container>
+        <h1>Unix时间戳</h1>
+        <div class="flex mt-2">
+            <div class=group style=margin-right:1em;flex-shrink:2><span class=static>当前时间</span>
+                <input id=time_now class="input text-info">
+                <select id=select_now_unit class=select onchange=updateTime()>
+                    <option value=s>秒
+                    <option value=ms>毫秒
+                </select>
+            </div>
+            <div class=group><button class="button primary" onclick=startUpdate(this)>开始</button>
+                <button class=button onclick=stopUpdate(this)>停止</button>
+                <button class=button onclick=updateTime()>刷新</button>
+            </div>
+        </div>
+        <div class="group mt-2"><span class=static>Unix时间戳</span>
+            <input id=input_time class="input inline" onpaste=setTimeout(timeToDate,1)>
+            <select id=select_input_unit class=select onchange=timeToDate()>
+                <option value=s>秒
+                <option value=ms>毫秒
+            </select>
+            <button class="button primary" onclick=timeToDate()>转换</button>
+            <input id=output_date class="input inline">
+        </div><br>
+        <div class="group mt-2"><span class=static>北京时间</span>
+            <input id=input_date class="input inline" onpaste=setTimeout(dateToTime,1)>
+            <button class="button primary" onclick=dateToTime()>转换</button>
+            <input id=output_time class="input inline">
+            <select id=select_output_unit class=select onchange=dateToTime()>
+                <option value=s>秒
+                <option value=ms>毫秒
+            </select>
+        </div>
+        <h3 class=mt-2>编程语言获取Unix时间戳：</h3>
+        <table class="table striped fullwidth mt-2">
+            <thead>
+                <tr>
+                    <th>语言
+                    <th>秒
+                    <th>毫秒
+            <tbody>
+                <tr>
+                    <td>JavaScript
+                    <td>Math.round(new Date() / 1000)
+                    <td>new Date().getTime()
+                <tr>
+                    <td>Java
+                    <td>System.currentTimeMillis() / 1000
+                    <td>System.currentTimeMillis()
+                <tr>
+                    <td>Python
+                    <td>int(time.time())
+                    <td>int(time.time() * 1000)
+                <tr>
+                    <td>Go
+                    <td>time.Now().Unix()
+                    <td>time.Now().UnixNano() / 1e6
+                <tr>
+                    <td>PHP
+                    <td>time()
+                    <td>(int)(microtime(true) * 1000)
+                <tr>
+                    <td>Ruby
+                    <td>Time.now.to_i
+                    <td>(Time.now.to_f * 1000).to_i
+                <tr>
+                    <td>C#
+                    <td>DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+                    <td>DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+                <tr>
+                    <td>Swift
+                    <td>NSDate().timeIntervalSince1970
+                    <td>NSDate().timeIntervalSince1970 * 1000
+                <tr>
+                    <td>Objective-C
+                    <td>[[NSDate date] timeIntervalSince1970]
+                    <td>[[NSDate date] timeIntervalSince1970] * 1000
+        </table>
+    </div>
+</main>
+<script src=../static/js/timestamp.js></script>

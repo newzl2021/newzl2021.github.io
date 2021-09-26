@@ -1,0 +1,37 @@
+<main>
+    <div class=container>
+        <h1>JSON格式化</h1>
+        <div class="flex mt1">
+            <div id=json_editor class=editarea onpaste=setTimeout(toTree,1)></div>
+            <div class=mid-menus>
+                <div><button class=button onclick=toTree()>
+                        <i class="fa fa-arrow-right"></i></button>
+                    <button class=button onclick=toJson()>
+                        <i class="fa fa-arrow-left"></i></button>
+                    <button class=button onclick=cleanup()>清空</button>
+                </div>
+            </div>
+            <div id=tree_editor class=editarea></div>
+        </div>
+    </div>
+</main>
+<script src=https://cdn.bootcss.com/jsoneditor/6.1.0/jsoneditor.min.js></script>
+<script>
+const json_editor = new JSONEditor(document.getElementById("json_editor"), {
+    mode: 'code'
+});
+const tree_editor = new JSONEditor(document.getElementById("tree_editor"), null);
+function toTree() {
+    json_editor.format();
+    tree_editor.set(JSON.parse(json_editor.getText()));
+    tree_editor.expandAll();
+}
+function toJson() {
+    json_editor.setText(JSON.stringify(tree_editor.get(), null, 2))
+}
+function cleanup() {
+    json_editor.setText('');
+    tree_editor.set(undefined)
+}
+json_editor.setText(null);
+</script>

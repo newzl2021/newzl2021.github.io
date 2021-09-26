@@ -1,0 +1,73 @@
+<main>
+    <div class=container>
+        <h1>Hash计算</h1><textarea id=area_text class="textarea mt-2" rows=15 placeholder=字符串></textarea>
+        <div class="group fullwidth mt-2"><select id=select_algo class=select onchange=calHash()>
+                <option value=MD5>MD5
+                <option value=SHA1>SHA1
+                <option value=SHA224>SHA224
+                <option value=SHA256>SHA256
+                <option value=SHA384>SHA384
+                <option value=SHA512>SHA512
+                <option value=Hmac-MD5>Hmac-MD5
+                <option value=Hmac-SHA1>Hmac-SHA1
+                <option value=Hmac-SHA224>Hmac-SHA224
+                <option value=Hmac-SHA256>Hmac-SHA256
+                <option value=Hmac-SHA384>Hmac-SHA384
+                <option value=Hmac-SHA512>Hmac-SHA512
+            </select>
+            <input id=input_key class=input placeholder=密钥,非必填>
+            <button class="button primary" onclick=calHash()>计算</button>
+        </div><input id=input_hash class="input mt-2" rows=1 placeholder=Hash值>
+    </div>
+</main>
+<script src=https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js></script>
+<script>
+function calHash() {
+    let text = document.getElementById('area_text').value;
+    if (!text) {
+        return
+    }
+    let key = document.getElementById('input_key').value;
+    let algo = document.getElementById('select_algo').value;
+    let hash;
+    switch (algo) {
+        case 'MD5':
+            hash = CryptoJS.MD5(text);
+            break;
+        case 'SHA1':
+            hash = CryptoJS.SHA1(text);
+            break;
+        case 'SHA224':
+            hash = CryptoJS.SHA224(text);
+            break;
+        case 'SHA256':
+            hash = CryptoJS.SHA256(text);
+            break;
+        case 'SHA384':
+            hash = CryptoJS.SHA384(text);
+            break;
+        case 'SHA512':
+            hash = CryptoJS.SHA512(text);
+            break;
+        case 'Hmac-MD5':
+            hash = CryptoJS.HmacMD5(text, key);
+            break;
+        case 'Hmac-SHA1':
+            hash = CryptoJS.HmacSHA1(text, key);
+            break;
+        case 'Hmac-SHA224':
+            hash = CryptoJS.HmacSHA224(text, key);
+            break;
+        case 'Hmac-SHA256':
+            hash = CryptoJS.HmacSHA256(text, key);
+            break;
+        case 'Hmac-SHA384':
+            hash = CryptoJS.HmacSHA384(text, key);
+            break;
+        case 'Hmac-SHA512':
+            hash = CryptoJS.HmacSHA512(text, key);
+            break;
+    }
+    document.getElementById('input_hash').value = hash;
+}
+</script>

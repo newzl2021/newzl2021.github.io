@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang=zh_cn>
+<meta charset=utf-8>
+<title>XiaoNiu工具</title>
+<meta name=keywords content=程序员工具>
+<meta name=description content=程序员工具>
+<link rel="shortcut icon" href=/favicon.ico>
+<link href=https://cdn.bootcss.com/font-awesome/5.10.0-11/css/all.min.css rel=stylesheet>
+<link href=https://cdn.bootcss.com/jsoneditor/6.1.0/jsoneditor.min.css rel=stylesheet>
+<link href=https://cdn.bootcss.com/highlight.js/9.15.9/styles/idea.min.css rel="stylesheet">
+<link rel=stylesheet href=../static/css/style.css>
+<style>
+    .container {
+        max-width: 100%
+    }
+    pre {
+        overflow: auto
+    }
+    .jsoneditor-poweredBy {
+        display: none
+    }
+    div.jsoneditor-menu,
+    .jsoneditor-modal .pico-modal-header {
+        background-color: #1E90FF
+    }
+    div.jsoneditor,
+    div.jsoneditor-menu {
+        border: 1px solid #1E90FF
+    }
+    .select {
+        flex-shrink: 1;
+        width: 100%
+    }
+    .options {
+        width: 200px;
+        margin: 0 24px;
+    }
+    #input_size {
+        max-width: 111px
+    }
+    .image {
+        width: 280px;
+        height: 280px;
+        background-color: #f3f3f3;
+        clear: both;
+        display: block;
+        margin: auto
+    }
+    #msg_list {
+        padding: 8px 16px;
+        height: 70vh;
+        font-size: 14px;
+        overflow: auto
+    }
+</style>
+<aside>
+    <h1 class=logo><a href="/">XiaoNiu工具</a></h1>
+    <nav class=side-nav>
+        <p>JSON
+        <ul>
+            <li><a href=/zh/json.html>JSON格式化</a>
+            <li><a href=/zh/json2xml.html>JSON/XML转换</a>
+            <li><a href=/zh/json2yaml.html>JSON/YAML转换</a>
+            <li><a href=/zh/json2go.html>JSON转Go Struct</a>
+        </ul>
+        <p>Base64
+        <ul>
+            <li><a href=/zh/base64.html>Base64编码解码</a>
+            <li><a href=/zh/image2base64.html>图片Base64编码</a>
+        </ul>
+        <p>转换
+        <ul>
+            <li><a href=/zh/timestamp.html>Unix时间戳</a>
+            <li><a href=/zh/color.html>颜色值转换</a>
+            <li><a href=/zh/number.html>进制转换</a>
+            <li><a href=/zh/url.html>URL编码解码</a>
+            <li><a href=/zh/unicode.html>Unicode编码转换</a>
+            <li><a href=/zh/pdf2img.html>PDF转图片</a>
+        </ul>
+        <p>Hash
+        <ul>
+            <li><a href=/zh/hash.html>Hash计算</a>
+            <li><a href=/zh/hashfile.html>文件Hash计算</a>
+        </ul>
+        <p>加密
+        <ul>
+            <li><a href=/zh/encrypt_aes.html>AES加密解密</a>
+            <li><a href=/zh/encrypt_des.html>DES加密解密</a>
+            <li><a href=/zh/encrypt_rsa.html>RSA加密解密</a>
+        </ul>
+        <p>其他
+        <ul>
+            <li><a href=/zh/tinyimg.html>图片压缩</a>
+            <li><a href=/zh/qrcode.html>二维码制作</a>
+            <li><a href=/zh/websocket.html>WebSocket测试</a>
+            <li><a href=/zh/regex.html>正则表达式测试</a>
+        </ul>
+    </nav>
+</aside>
+<script>
+var _hmt = _hmt || [];
+let hm = document.createElement("script");
+hm.src = "https://hm.baidu.com/hm.js?e3d5bc397b23c3f6a8036739dae1557b";
+let s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+let tools = document.querySelectorAll('.side-nav li');
+for (let i = 0; i < tools.length; i++) {
+    let node = tools[i];
+    if (node.querySelector('a').getAttribute('href').endsWith(document.location.pathname)) {
+        node.classList.add('active');
+        break
+    }
+}
+</script><main>
+    <div class=container>
+        <h1>图片压缩</h1>
+        <div class="file fullwidth mt-2"><span class=file-cta><input id=input_file class=file-input type=file
+                    accept=image/png,image/jpeg,image/gif,image/jpg onchange=preview(this.files[0])>
+                <span class=file-icon><i class="fas fa-upload"></i></span><span class=file-button>选择一张图片</span></span>
+            <span id=file_name class=file-name></span>
+        </div>
+        <div id=img_input class="textarea mt-2"><img></div>
+        <p id=input_info class="help text-info">
+        <div class="flex mt-2"><label class="group fullwidth"><span class=static>宽</span>
+                <input id=output_width class=input type=number onchange=onChangeWidth()>
+                <span class=static>高</span>
+                <input id=output_height class=input type=number onchange=onChangeHeight()>
+                <span class=static>质量</span>
+                <select id=select_quality class=select></select>
+                <input id=output_quality class=input type=number placeholder=自定义质量 onchange=onInputQuality()></label>
+            <div class=group style=margin-left:1em><button class="button primary" onclick=compress(this)>压缩</button>
+                <button class=button onclick=save()>保存</button>
+            </div>
+        </div>
+        <div id=img_output class="textarea mt-2"><img></div>
+        <p id=output_info class="help text-info">
+        <div class="tile mt-2">使用JavaScript进行压缩，图片不会被上传到服务器。</div>
+    </div>
+</main>
+<script src=../static/js/tinyimg.js></script>

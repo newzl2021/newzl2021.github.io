@@ -1,0 +1,82 @@
+<main>
+    <div class=container>
+        <h1>Unix时间戳</h1>
+        <div class="flex mt-2">
+            <div class=group style=margin-right:1em;flex-shrink:2><span class=static>当前时间</span>
+                <input id=time_now class="input text-info">
+                <select id=select_now_unit class=select onchange=updateTime()>
+                    <option value=s>秒
+                    <option value=ms>毫秒
+                </select>
+            </div>
+            <div class=group><button class="button primary" onclick=startUpdate(this)>开始</button>
+                <button class=button onclick=stopUpdate(this)>停止</button>
+                <button class=button onclick=updateTime()>刷新</button>
+            </div>
+        </div>
+        <div class="group mt-2"><span class=static>Unix时间戳</span>
+            <input id=input_time class="input inline" onpaste=setTimeout(timeToDate,1)>
+            <select id=select_input_unit class=select onchange=timeToDate()>
+                <option value=s>秒
+                <option value=ms>毫秒
+            </select>
+            <button class="button primary" onclick=timeToDate()>转换</button>
+            <input id=output_date class="input inline">
+        </div><br>
+        <div class="group mt-2"><span class=static>北京时间</span>
+            <input id=input_date class="input inline" onpaste=setTimeout(dateToTime,1)>
+            <button class="button primary" onclick=dateToTime()>转换</button>
+            <input id=output_time class="input inline">
+            <select id=select_output_unit class=select onchange=dateToTime()>
+                <option value=s>秒
+                <option value=ms>毫秒
+            </select>
+        </div>
+        <h3 class=mt-2>编程语言获取Unix时间戳：</h3>
+        <table class="table striped fullwidth mt-2">
+            <thead>
+                <tr>
+                    <th>语言
+                    <th>秒
+                    <th>毫秒
+            <tbody>
+                <tr>
+                    <td>JavaScript
+                    <td>Math.round(new Date() / 1000)
+                    <td>new Date().getTime()
+                <tr>
+                    <td>Java
+                    <td>System.currentTimeMillis() / 1000
+                    <td>System.currentTimeMillis()
+                <tr>
+                    <td>Python
+                    <td>int(time.time())
+                    <td>int(time.time() * 1000)
+                <tr>
+                    <td>Go
+                    <td>time.Now().Unix()
+                    <td>time.Now().UnixNano() / 1e6
+                <tr>
+                    <td>PHP
+                    <td>time()
+                    <td>(int)(microtime(true) * 1000)
+                <tr>
+                    <td>Ruby
+                    <td>Time.now.to_i
+                    <td>(Time.now.to_f * 1000).to_i
+                <tr>
+                    <td>C#
+                    <td>DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+                    <td>DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+                <tr>
+                    <td>Swift
+                    <td>NSDate().timeIntervalSince1970
+                    <td>NSDate().timeIntervalSince1970 * 1000
+                <tr>
+                    <td>Objective-C
+                    <td>[[NSDate date] timeIntervalSince1970]
+                    <td>[[NSDate date] timeIntervalSince1970] * 1000
+        </table>
+    </div>
+</main>
+<script src=../static/js/timestamp.js></script>
