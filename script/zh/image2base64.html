@@ -50,8 +50,8 @@ function onChange(e) {
 function loadImage(file) {
     let reader = new FileReader();
     reader.onload = function(e) {
-        file_name.innerHTML = file.name + ` & nbsp; & nbsp; < a > [$ {
+        file_name.innerHTML = file.name + ` & nbsp; & nbsp; <a> [$ {
             formatSize(file.size)
-        }] < /a>`; img_input.innerHTML = `<img src="${e.target.result}">`; area_base64.value = e.target.result; }; reader.readAsDataURL(file); }
+        }] </a>`; img_input.innerHTML = `<img src="${e.target.result}">`; area_base64.value = e.target.result; }; reader.readAsDataURL(file); }
     document.addEventListener('paste', function (event) { if (event.clipboardData || event.originalEvent) { let data = (event.clipboardData || event.originalEvent.clipboardData); if (data.items) { let items = data.items, len = items.length, blob = null; for (let i = 0; i < len; i++) { if (items[i].type.indexOf("image") !== -1) { blob = items[i].getAsFile(); loadImage(blob); } } } } })
 </script>

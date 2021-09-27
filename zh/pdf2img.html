@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang=zh_cn>
 <meta charset=utf-8>
-<title>XiaoNiu工具</title>
+<title>程序员工具</title>
+ <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 <meta name=keywords content=程序员工具>
 <meta name=description content=程序员工具>
 <link rel="shortcut icon" href=/favicon.ico>
 <link href=https://cdn.bootcss.com/font-awesome/5.10.0-11/css/all.min.css rel=stylesheet>
 <link href=https://cdn.bootcss.com/jsoneditor/6.1.0/jsoneditor.min.css rel=stylesheet>
 <link href=https://cdn.bootcss.com/highlight.js/9.15.9/styles/idea.min.css rel="stylesheet">
-<link rel=stylesheet href=../static/css/style.css>
+<link rel=stylesheet href=/xiaoniutool/static/css/style.css>
 <style>
     .container {
         max-width: 100%
@@ -58,59 +59,50 @@
     <nav class=side-nav>
         <p>JSON
         <ul>
-            <li><a href=/zh/json.html>JSON格式化</a>
-            <li><a href=/zh/json2xml.html>JSON/XML转换</a>
-            <li><a href=/zh/json2yaml.html>JSON/YAML转换</a>
-            <li><a href=/zh/json2go.html>JSON转Go Struct</a>
+            <li><a href=/xiaoniutool/zh/json.html>JSON格式化</a>
+            <li><a href=/xiaoniutool/zh/json2xml.html>JSON/XML转换</a>
+            <li><a href=/xiaoniutool/zh/json2yaml.html>JSON/YAML转换</a>
+            <li><a href=/xiaoniutool/zh/json2go.html>JSON转Go Struct</a>
         </ul>
-        <p>Base64
+        <p>Base64/Hash
         <ul>
-            <li><a href=/zh/base64.html>Base64编码解码</a>
-            <li><a href=/zh/image2base64.html>图片Base64编码</a>
+            <li><a href=/xiaoniutool/zh/base64.html>Base64编码解码</a>
+            <li><a href=/xiaoniutool/zh/image2base64.html>图片Base64编码</a>
+            <li><a href=/xiaoniutool/zh/hash.html>Hash计算</a>
+            <li><a href=/xiaoniutool/zh/hashfile.html>文件Hash计算</a>
         </ul>
         <p>转换
         <ul>
-            <li><a href=/zh/timestamp.html>Unix时间戳</a>
-            <li><a href=/zh/color.html>颜色值转换</a>
-            <li><a href=/zh/number.html>进制转换</a>
-            <li><a href=/zh/url.html>URL编码解码</a>
-            <li><a href=/zh/unicode.html>Unicode编码转换</a>
-            <li><a href=/zh/pdf2img.html>PDF转图片</a>
-        </ul>
-        <p>Hash
-        <ul>
-            <li><a href=/zh/hash.html>Hash计算</a>
-            <li><a href=/zh/hashfile.html>文件Hash计算</a>
+            <li><a href=/xiaoniutool/zh/timestamp.html>Unix时间戳</a>
+            <li><a href=/xiaoniutool/zh/color.html>颜色值转换</a>
+            <li><a href=/xiaoniutool/zh/number.html>进制转换</a>
+            <li><a href=/xiaoniutool/zh/url.html>URL编码解码</a>
+            <li><a href=/xiaoniutool/zh/unicode.html>Unicode编码转换</a>
+            <li><a href=/xiaoniutool/zh/pdf2img.html>PDF转图片</a>
         </ul>
         <p>加密
         <ul>
-            <li><a href=/zh/encrypt_aes.html>AES加密解密</a>
-            <li><a href=/zh/encrypt_des.html>DES加密解密</a>
-            <li><a href=/zh/encrypt_rsa.html>RSA加密解密</a>
+            <li><a href=/xiaoniutool/zh/encrypt_aes.html>AES加密解密</a>
+            <li><a href=/xiaoniutool/zh/encrypt_des.html>DES加密解密</a>
+            <li><a href=/xiaoniutool/zh/encrypt_rsa.html>RSA加密解密</a>
         </ul>
         <p>其他
         <ul>
-            <li><a href=/zh/tinyimg.html>图片压缩</a>
-            <li><a href=/zh/qrcode.html>二维码制作</a>
-            <li><a href=/zh/websocket.html>WebSocket测试</a>
-            <li><a href=/zh/regex.html>正则表达式测试</a>
+            <li><a href=/xiaoniutool/zh/tinyimg.html>图片压缩</a>
+            <li><a href=/xiaoniutool/zh/qrcode.html>二维码制作</a>
+            <li><a href=/xiaoniutool/zh/websocket.html>WebSocket测试</a>
+            <li><a href=/xiaoniutool/zh/regex.html>正则表达式测试</a>
         </ul>
     </nav>
 </aside>
 <script>
 var _hmt = _hmt || [];
-let hm = document.createElement("script");
-hm.src = "https://hm.baidu.com/hm.js?e3d5bc397b23c3f6a8036739dae1557b";
-let s = document.getElementsByTagName("script")[0];
-s.parentNode.insertBefore(hm, s);
-let tools = document.querySelectorAll('.side-nav li');
-for (let i = 0; i < tools.length; i++) {
-    let node = tools[i];
-    if (node.querySelector('a').getAttribute('href').endsWith(document.location.pathname)) {
-        node.classList.add('active');
-        break
-    }
-}
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c88dc783ad09061423b4245401cfb826";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 </script><main>
     <div class=container>
         <h1>PDF转图片</h1>
