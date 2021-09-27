@@ -2,9 +2,9 @@
 	padding:1px;
 	margin:0;
 	box-sizing:border-box;
-	--color-primary:#1E90FF;
-	--color-accent:#87CEFA;
-	--color-text:#34495e
+	--color-primary:#3295d9;
+	--color-accent:#69bdfb;
+	--color-text:#34495e;
 }
 html,body {
 	font-family:Source Sans Pro,Helvetica Neue,Arial,sans-serif;
@@ -140,7 +140,7 @@ aside .logo {
 	padding:20px 0;
 }
 header,header .container {
-	background:#565656
+	background:#565656;
 }
 header .container {
 	display:flex;
