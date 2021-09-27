@@ -55,7 +55,7 @@
     }
 </style>
 <aside>
-    <h1 class=logo><a href="/">XiaoNiu工具</a></h1>
+    <h1 class=logo><a href="/xiaoniutool">程序员工具</a></h1>
     <nav class=side-nav>
         <p>JSON
         <ul>
@@ -98,11 +98,20 @@
 <script>
 var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?c88dc783ad09061423b4245401cfb826";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c88dc783ad09061423b4245401cfb826";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+    let tools = document.querySelectorAll('.side-nav li');
+    for (let i = 0; i < tools.length; i++) {
+        let node = tools[i];
+        if (node.querySelector('a').getAttribute('href').endsWith(document.location.pathname)) {
+            node.classList.add('active');
+            break
+        }
+    }
 })();
+
 </script><main>
     <div class=container>
         <h1>文件Hash计算</h1>

@@ -47,13 +47,13 @@ input[type=color] {
 	padding:0;
 	border:none;
 	outline:none;
-	cursor:pointer
+	cursor:pointer;
 }
 input::-webkit-color-swatch-wrapper {
-	background:#fff
+	background:#fff;
 }
 input::-webkit-color-swatch {
-	position:relative
+	position:relative;
 }
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
 	-webkit-appearance:none
@@ -137,7 +137,7 @@ aside .logo {
 	font-weight:700;
 	font-size:24px;
 	text-align:center;
-	padding:20px 0
+	padding:20px 0;
 }
 header,header .container {
 	background:#565656
@@ -524,11 +524,11 @@ table td:not([align]),table th:not([align]) {
 }
 @media screen and (max-width:1200px) {
 	aside {
-	display:none
-}
-.tools {
-	grid-template-columns:repeat(3,1fr)
-}
+		display:none
+	}
+	.tools {
+		grid-template-columns:repeat(3,1fr)
+	}
 }.tool {
 	cursor:pointer;
 	padding:16px;
