@@ -1,0 +1,54 @@
+<main>
+    <div class=container>
+        <h1>HTML/JS格式化</h1>
+        <div class="flex mt1">
+            <div class=editarea><label>HTML/JS</label>
+                <pre id=input class="textarea fullHeight fixed-size" contenteditable=true></pre>
+            </div>
+            <div class=mid-menus>
+                <div>
+                    <button class="button primary" onclick=html_convert()>HTML转换</button>
+                    <button class="button success" onclick=js_convert()>JS转换</button>
+                    <button class=button data-clipboard-action=copy data-clipboard-target=#output>复制</button>
+                    <button class=button onclick=cleanup()>清空</button>
+                </div>
+            </div>
+            <div class=editarea><label>格式化</label>
+                <pre class="textarea fullHeight fixed-size"><code id=output></code></pre>
+            </div>
+        </div>
+    </div>
+</main>
+<script src=https://cdn.bootcss.com/highlight.js/9.15.9/highlight.min.js></script>
+<script src=https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js></script>
+<script src=/static/js/htmlformat.js></script>
+<script src=/static/js/jsformat.js></script>
+<script>
+function html_convert() {
+    let text = document.getElementById('input').innerText;
+    if (!text) {
+        return
+    }
+    let output_value = style_html(text, 4, " ", 80);
+    document.getElementById('output').innerText = output_value;
+}
+function js_convert() {
+    let text = document.getElementById('input').innerText;
+    if (!text) {
+        return
+    }
+    let output_value = js_beautify(text, 4, " ");
+    document.getElementById('output').innerText = output_value;
+}
+function cleanup() {
+    document.getElementById('input').innerHTML = '';
+    document.getElementById('output').innerHTML = '';
+}
+new ClipboardJS('.button').on('success',
+    function() {
+        alert('复制成功')
+    }).on('error',
+    function() {
+        alert('复制失败,请手动复制')
+    });
+</script>

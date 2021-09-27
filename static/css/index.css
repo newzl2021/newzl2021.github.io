@@ -1143,7 +1143,7 @@ li {
 	border-radius:100%;
 }
 .part .item a h3 {
-	margin-left:32px;
+	margin-left:16px;
 	color:#3c3c3c;
 	font-size:14px;
 	white-space:nowrap;
@@ -1159,10 +1159,10 @@ li {
 	color:#f84b44;
 }
 .part .item a p {
-	margin-left:32px;
+	margin-left:16px;
 	color:#8f8f8f;
 	font-size:12px;
-	height:3em;
+	height:4.5em;
 	line-height:1.5em;
 	overflow:hidden;
 	display:-webkit-box;
