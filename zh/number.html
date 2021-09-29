@@ -2,7 +2,7 @@
 <html lang=zh_cn>
 <meta charset=utf-8>
 <title>程序员工具</title>
- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+ <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.5"/>
 <meta name=keywords content=程序员工具>
 <meta name=description content=程序员工具>
 <link rel="shortcut icon" href=/favicon.ico>
@@ -67,7 +67,7 @@
         </ul>
         <p>Base64/Hash
         <ul>
-            <li><a href=/zh/base64.html>Base64编码解码</a>
+            <li><a href=/zh/base64.html>Base64编码/解码</a>
             <li><a href=/zh/image2base64.html>图片Base64编码</a>
             <li><a href=/zh/hash.html>Hash计算</a>
             <li><a href=/zh/hashfile.html>文件Hash计算</a>
@@ -83,15 +83,16 @@
         </ul>
         <p>加密
         <ul>
-            <li><a href=/zh/encrypt_aes.html>AES加密解密</a>
-            <li><a href=/zh/encrypt_des.html>DES加密解密</a>
-            <li><a href=/zh/encrypt_rsa.html>RSA加密解密</a>
+            <li><a href=/zh/encrypt_aes.html>AES加密/解密</a>
+            <li><a href=/zh/encrypt_des.html>DES加密/解密</a>
+            <li><a href=/zh/encrypt_rsa.html>RSA加密/解密</a>
         </ul>
         <p>其他
         <ul>
             <li><a href=/zh/tinyimg.html>图片压缩</a>
             <li><a href=/zh/qrcode.html>二维码制作</a>
             <li><a href=/zh/websocket.html>WebSocket测试</a>
+            <li><a href=/zh/http.html>HTTP测试</a>
             <li><a href=/zh/regex.html>正则表达式测试</a>
         </ul>
     </nav>
@@ -116,7 +117,7 @@ var _hmt = _hmt || [];
 </script><main>
     <div class=container>
         <h1>进制转换</h1>
-        <div class="group mt-2"><select id=select_type class=select onchange=convert()>
+        <div class="group mt-2 halfwidth"><select id=select_type class=select onchange=convert()>
                 <option value=2>2进制
                 <option value=4>4进制
                 <option value=8>8进制

@@ -14,7 +14,7 @@
                     <span>PNG</span></button>
             </div><button class="button primary" onclick=save()>
                 <span>保存本页</span></button>
-            <button class="button primary" onclick=saveAll()>
+            <button class="button success" onclick=saveAll()>
                 <span>全部保存</span></button>
         </div>
         <p id=page_num>
@@ -26,7 +26,7 @@
             <button class=button onclick=prevPage()>
                 <span><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;上一页</span>
             </button>
-            <button class=button onclick=nextPage()>
+            <button class="button primary" onclick=nextPage()>
                 <span>下一页&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></span>
             </button>
         </div>
@@ -86,7 +86,12 @@ function nextPage() {
 
 function readerPage(callback) {
     pdf.getPage(pageNum).then(function (page) {
-        let scale = 1.5;
+        let scale = 1;
+        let windowWidth = window.screen.width;
+        console.log("windowWidth: ", windowWidth);
+        if (windowWidth < 640){
+            scale = 0.5;
+        }
         let viewport = page.getViewport({
             scale: scale
         });

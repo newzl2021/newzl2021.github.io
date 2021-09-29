@@ -1,0 +1,190 @@
+<main>
+    <div class=container>
+        <h1>HTTP请求</h1>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>URL地址</span>
+                <input id="txt_url" class="input" name="txt_url" type="text" value=""
+                placeholder="请求URL地址，例如：http://www.yunjson.com">
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>请求方式</span>
+            <select id=txt_httptype class=select>
+                <option value=GET>GET方式
+                <option value=POST>POST方式
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>Host</span>
+            <input id="txt_host" class="input" name="txt_host" value="" type="text" placeholder="请输入Host标头，例如：www.yunjson.com" autocomplete="off" />
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>POST数据</span>
+                <textarea id="txt_postdata" name="txt_postdata" rows="6"
+                style="max-height:150px;width:100%;" placeholder="请填写POST数据，例如：k1=v1&k2=v2"></textarea>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>设定Header</span>
+                <textarea id="txt_header" name="txt_header" rows="5"
+                style="max-height:150px;width:100%;" placeholder="Key:Value格式，每行一个，多个请换行"></textarea>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>Cookie</span>
+                <textarea id="txt_cookie" name="txt_cookie" rows="5"
+                style="max-height:150px;width:100%;" placeholder="请填写请求时要发送的Cookie，例如：k1=v1;k2=v2"></textarea>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>编码方式</span>
+            <select id=txt_code class=select>
+                <option value="">
+                    自动识别
+                </option>
+                <option value="Default">
+                    Default
+                </option>
+                <option value="UTF-8">
+                    UTF-8
+                </option>
+                <option value="GBK">
+                    GBK
+                </option>
+                <option value="GB2312">
+                    GB2312
+                </option>
+                <option value="ASCII">
+                    ASCII
+                </option>
+                <option value="Unicode">
+                    Unicode
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>HTTP版本</span>
+            <select id=txt_httpver class=select>
+                <option value="0" selected>
+                    不设置
+                </option>
+                <option value="2">
+                    HTTP/1.1
+                </option>
+                <option value="1">
+                    HTTP/1.0
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>超时时间</span>
+            <select id=txt_outtime class=select>
+                <option value="200">
+                    200毫秒
+                </option>
+                <option value="500">
+                    500毫秒
+                </option>
+                <option value="1000">
+                    1秒
+                </option>
+                <option value="15000" selected>
+                    15秒
+                </option>
+                <option value="30000">
+                    30秒
+                </option>
+                <option value="60000">
+                    60秒
+                </option>
+                <option value="100000">
+                    100秒
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>Content-Type</span>
+            <select id=txt_contype class=select>
+                <option value="text/html">
+                    text/html
+                </option>
+                <option value="application/x-www-form-urlencoded">
+                    application/x-www-form-urlencoded
+                </option>
+                <option value="application/json">
+                    application/json
+                </option>
+                <option value="text/json">
+                    text/json
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>UserAgent</span>
+            <select id=txt_useragent class=select>
+                <option value="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)">
+                    Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+                </option>
+                <option value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, likeGecko) Chrome/60.0.3112.90 Safari/537.36">
+                    Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
+                    Chrome/60.0.3112.90 Safari/537.36
+                </option>
+                <option value="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0">
+                    Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0
+                </option>
+                <option value="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.0)">
+                    Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.0)
+                </option>
+                <option value="Opera/9.27 (Windows NT 5.2; U; zh-cn)">
+                    Opera/9.27 (Windows NT 5.2; U; zh-cn)
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>自定义UserAgent</span>
+                <input class="input" id="txt_setuseragent" name="txt_setuseragent"
+                value="" type="text" placeholder="请输入自定义UserAgent，当填写时优先使用自定义UserAgent"
+                autocomplete="off" />
+            </div>
+        </div>
+        <button class="button primary fullwidth" onclick=http_request()>发起请求</button>
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src=/static/js/layer.js></script>
+<script>
+function http_request() {
+    jQuery.ajax({
+        url: "/Handle/Do.aspx",
+        type: "post",
+        data: { id: '0' },
+        contentType: "json",
+        timeout: 1000,
+        headers: {
+        },
+        success: function(msg) {
+            alert(msg);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+        },
+        complete: function(XMLHttpRequest, textStatus) {
+            this; // 调用本次AJAX请求时传递的options参数
+            layer.open({
+                type: 1 //Page层类型
+                ,title: '数据结果'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,content: '<div style="padding:50px;">这是一个非常普通的页面层，传入了自定义的 html</div>'
+            });
+        }
+    });
+}
+</script>

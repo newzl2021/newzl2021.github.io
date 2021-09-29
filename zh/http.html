@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang=zh_cn>
+<meta charset=utf-8>
+<title>程序员工具</title>
+ <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.5"/>
+<meta name=keywords content=程序员工具>
+<meta name=description content=程序员工具>
+<link rel="shortcut icon" href=/favicon.ico>
+<link href=https://cdn.bootcss.com/font-awesome/5.10.0-11/css/all.min.css rel=stylesheet>
+<link href=https://cdn.bootcss.com/jsoneditor/6.1.0/jsoneditor.min.css rel=stylesheet>
+<link href=https://cdn.bootcss.com/highlight.js/9.15.9/styles/idea.min.css rel="stylesheet">
+<link rel=stylesheet href=/static/css/style.css>
+<style>
+    .container {
+        max-width: 100%
+    }
+    pre {
+        overflow: auto
+    }
+    .jsoneditor-poweredBy {
+        display: none
+    }
+    div.jsoneditor-menu,
+    .jsoneditor-modal .pico-modal-header {
+        background-color: #1E90FF
+    }
+    div.jsoneditor,
+    div.jsoneditor-menu {
+        border: 1px solid #1E90FF
+    }
+    .select {
+        flex-shrink: 1;
+        width: 100%
+    }
+    .options {
+        width: 200px;
+        margin: 0 24px;
+    }
+    #input_size {
+        max-width: 111px
+    }
+    .image {
+        width: 280px;
+        height: 280px;
+        background-color: #f3f3f3;
+        clear: both;
+        display: block;
+        margin: auto
+    }
+    #msg_list {
+        padding: 8px 16px;
+        height: 70vh;
+        font-size: 14px;
+        overflow: auto
+    }
+</style>
+<aside>
+    <h1 class=logo><a href="">程序员工具</a></h1>
+    <nav class=side-nav>
+        <p>JSON/JS格式化
+        <ul>
+            <li><a href=/zh/json.html>JSON格式化</a>
+            <li><a href=/zh/html_format.html>HTML/JS格式化</a>
+            <li><a href=/zh/json2xml.html>JSON/XML转换</a>
+            <li><a href=/zh/json2yaml.html>JSON/YAML转换</a>
+            <li><a href=/zh/json2go.html>JSON转Go Struct</a>
+        </ul>
+        <p>Base64/Hash
+        <ul>
+            <li><a href=/zh/base64.html>Base64编码/解码</a>
+            <li><a href=/zh/image2base64.html>图片Base64编码</a>
+            <li><a href=/zh/hash.html>Hash计算</a>
+            <li><a href=/zh/hashfile.html>文件Hash计算</a>
+        </ul>
+        <p>转换
+        <ul>
+            <li><a href=/zh/timestamp.html>Unix时间戳</a>
+            <li><a href=/zh/color.html>颜色值转换</a>
+            <li><a href=/zh/number.html>进制转换</a>
+            <li><a href=/zh/url.html>URL编码解码</a>
+            <li><a href=/zh/unicode.html>Unicode编码转换</a>
+            <li><a href=/zh/pdf2img.html>PDF转图片</a>
+        </ul>
+        <p>加密
+        <ul>
+            <li><a href=/zh/encrypt_aes.html>AES加密/解密</a>
+            <li><a href=/zh/encrypt_des.html>DES加密/解密</a>
+            <li><a href=/zh/encrypt_rsa.html>RSA加密/解密</a>
+        </ul>
+        <p>其他
+        <ul>
+            <li><a href=/zh/tinyimg.html>图片压缩</a>
+            <li><a href=/zh/qrcode.html>二维码制作</a>
+            <li><a href=/zh/websocket.html>WebSocket测试</a>
+            <li><a href=/zh/http.html>HTTP测试</a>
+            <li><a href=/zh/regex.html>正则表达式测试</a>
+        </ul>
+    </nav>
+</aside>
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c88dc783ad09061423b4245401cfb826";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+    let tools = document.querySelectorAll('.side-nav li');
+    for (let i = 0; i < tools.length; i++) {
+        let node = tools[i];
+        if (node.querySelector('a').getAttribute('href').endsWith(document.location.pathname)) {
+            node.classList.add('active');
+            break
+        }
+    }
+})();
+
+</script><main>
+    <div class=container>
+        <h1>HTTP请求</h1>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>URL地址</span>
+                <input id="txt_url" class="input" name="txt_url" type="text" value=""
+                placeholder="请求URL地址，例如：http://www.yunjson.com">
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>请求方式</span>
+            <select id=txt_httptype class=select>
+                <option value=GET>GET方式
+                <option value=POST>POST方式
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>Host</span>
+            <input id="txt_host" class="input" name="txt_host" value="" type="text" placeholder="请输入Host标头，例如：www.yunjson.com" autocomplete="off" />
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>POST数据</span>
+                <textarea id="txt_postdata" name="txt_postdata" rows="6"
+                style="max-height:150px;width:100%;" placeholder="请填写POST数据，例如：k1=v1&k2=v2"></textarea>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>设定Header</span>
+                <textarea id="txt_header" name="txt_header" rows="5"
+                style="max-height:150px;width:100%;" placeholder="Key:Value格式，每行一个，多个请换行"></textarea>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>Cookie</span>
+                <textarea id="txt_cookie" name="txt_cookie" rows="5"
+                style="max-height:150px;width:100%;" placeholder="请填写请求时要发送的Cookie，例如：k1=v1;k2=v2"></textarea>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>编码方式</span>
+            <select id=txt_code class=select>
+                <option value="">
+                    自动识别
+                </option>
+                <option value="Default">
+                    Default
+                </option>
+                <option value="UTF-8">
+                    UTF-8
+                </option>
+                <option value="GBK">
+                    GBK
+                </option>
+                <option value="GB2312">
+                    GB2312
+                </option>
+                <option value="ASCII">
+                    ASCII
+                </option>
+                <option value="Unicode">
+                    Unicode
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>HTTP版本</span>
+            <select id=txt_httpver class=select>
+                <option value="0" selected>
+                    不设置
+                </option>
+                <option value="2">
+                    HTTP/1.1
+                </option>
+                <option value="1">
+                    HTTP/1.0
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>超时时间</span>
+            <select id=txt_outtime class=select>
+                <option value="200">
+                    200毫秒
+                </option>
+                <option value="500">
+                    500毫秒
+                </option>
+                <option value="1000">
+                    1秒
+                </option>
+                <option value="15000" selected>
+                    15秒
+                </option>
+                <option value="30000">
+                    30秒
+                </option>
+                <option value="60000">
+                    60秒
+                </option>
+                <option value="100000">
+                    100秒
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>Content-Type</span>
+            <select id=txt_contype class=select>
+                <option value="text/html">
+                    text/html
+                </option>
+                <option value="application/x-www-form-urlencoded">
+                    application/x-www-form-urlencoded
+                </option>
+                <option value="application/json">
+                    application/json
+                </option>
+                <option value="text/json">
+                    text/json
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group" style=margin-right:1em;flex-shrink:2><span class=static>UserAgent</span>
+            <select id=txt_useragent class=select>
+                <option value="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)">
+                    Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+                </option>
+                <option value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, likeGecko) Chrome/60.0.3112.90 Safari/537.36">
+                    Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
+                    Chrome/60.0.3112.90 Safari/537.36
+                </option>
+                <option value="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0">
+                    Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0
+                </option>
+                <option value="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.0)">
+                    Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.0)
+                </option>
+                <option value="Opera/9.27 (Windows NT 5.2; U; zh-cn)">
+                    Opera/9.27 (Windows NT 5.2; U; zh-cn)
+                </option>
+            </select>
+            </div>
+        </div>
+        <div class="flex mt-2">
+            <div class="group fullwidth" style=margin-right:1em;flex-shrink:2><span class=static>自定义UserAgent</span>
+                <input class="input" id="txt_setuseragent" name="txt_setuseragent"
+                value="" type="text" placeholder="请输入自定义UserAgent，当填写时优先使用自定义UserAgent"
+                autocomplete="off" />
+            </div>
+        </div>
+        <button class="button primary fullwidth" onclick=http_request()>发起请求</button>
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src=/static/js/layer.js></script>
+<script>
+function http_request() {
+    jQuery.ajax({
+        url: "/Handle/Do.aspx",
+        type: "post",
+        data: { id: '0' },
+        contentType: "json",
+        timeout: 1000,
+        headers: {
+        },
+        success: function(msg) {
+            alert(msg);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+        },
+        complete: function(XMLHttpRequest, textStatus) {
+            this; // 调用本次AJAX请求时传递的options参数
+            //在这里面输入任何合法的js语句
+            layer.open({
+                type: 1 //Page层类型
+                ,title: 'Hello layer'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,content: '<div style="padding:50px;">这是一个非常普通的页面层，传入了自定义的 html</div>'
+            });
+        }
+    });
+}
+</script>

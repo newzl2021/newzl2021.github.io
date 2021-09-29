@@ -2,7 +2,7 @@
 <html lang=zh_cn>
 <meta charset=utf-8>
 <title>程序员工具</title>
- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+ <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.5"/>
 <meta name=keywords content=程序员工具>
 <meta name=description content=程序员工具>
 <link rel="shortcut icon" href=/favicon.ico>
@@ -67,7 +67,7 @@
         </ul>
         <p>Base64/Hash
         <ul>
-            <li><a href=/zh/base64.html>Base64编码解码</a>
+            <li><a href=/zh/base64.html>Base64编码/解码</a>
             <li><a href=/zh/image2base64.html>图片Base64编码</a>
             <li><a href=/zh/hash.html>Hash计算</a>
             <li><a href=/zh/hashfile.html>文件Hash计算</a>
@@ -83,15 +83,16 @@
         </ul>
         <p>加密
         <ul>
-            <li><a href=/zh/encrypt_aes.html>AES加密解密</a>
-            <li><a href=/zh/encrypt_des.html>DES加密解密</a>
-            <li><a href=/zh/encrypt_rsa.html>RSA加密解密</a>
+            <li><a href=/zh/encrypt_aes.html>AES加密/解密</a>
+            <li><a href=/zh/encrypt_des.html>DES加密/解密</a>
+            <li><a href=/zh/encrypt_rsa.html>RSA加密/解密</a>
         </ul>
         <p>其他
         <ul>
             <li><a href=/zh/tinyimg.html>图片压缩</a>
             <li><a href=/zh/qrcode.html>二维码制作</a>
             <li><a href=/zh/websocket.html>WebSocket测试</a>
+            <li><a href=/zh/http.html>HTTP测试</a>
             <li><a href=/zh/regex.html>正则表达式测试</a>
         </ul>
     </nav>
@@ -129,7 +130,7 @@ var _hmt = _hmt || [];
                     <span>PNG</span></button>
             </div><button class="button primary" onclick=save()>
                 <span>保存本页</span></button>
-            <button class="button primary" onclick=saveAll()>
+            <button class="button success" onclick=saveAll()>
                 <span>全部保存</span></button>
         </div>
         <p id=page_num>
@@ -141,7 +142,7 @@ var _hmt = _hmt || [];
             <button class=button onclick=prevPage()>
                 <span><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;上一页</span>
             </button>
-            <button class=button onclick=nextPage()>
+            <button class="button primary" onclick=nextPage()>
                 <span>下一页&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></span>
             </button>
         </div>
@@ -201,7 +202,12 @@ function nextPage() {
 
 function readerPage(callback) {
     pdf.getPage(pageNum).then(function (page) {
-        let scale = 1.5;
+        let scale = 1;
+        let windowWidth = window.screen.width;
+        console.log("windowWidth: ", windowWidth);
+        if (windowWidth < 640){
+            scale = 0.5;
+        }
         let viewport = page.getViewport({
             scale: scale
         });
